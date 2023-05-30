@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity()
 
     fun loadJSON()
     {
-        val url = "https://pokeapi.co/api/v2/pokemon?limit=1281&offset=0"
+        //val url = "https://pokeapi.co/api/v2/pokemon?limit=1281&offset=0"
+        val url = "https://pokeapi.co/api/v2/pokemon"
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
 
@@ -60,10 +61,5 @@ class MainActivity : AppCompatActivity()
         mainIntent = Intent(this, DetailActivity::class.java)
         mainIntent.putExtra("NAME", pokemon.name)
         startActivity(mainIntent)
-    }
-
-    fun boxChecked()
-    {
-
     }
 }

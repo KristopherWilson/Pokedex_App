@@ -39,6 +39,8 @@ class PokemonAdapter(var pokemonList: Pokemon, var mainActivity: MainActivity) :
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int)
     {
         holder.textViewName.text = pokemonList.results[position].name.toUpperCase()
+        holder.checkMark.alpha = 0f
+
         holder.buttonInfo.setOnClickListener{
             mainActivity.infoButtonClicked(pokemonList.results[position])
         }//end buttonInfo holder

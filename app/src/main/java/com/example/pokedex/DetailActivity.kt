@@ -20,6 +20,6 @@ class DetailActivity : AppCompatActivity()
 
     fun insertInfo()
     {
-        detailName.text = intent.getStringExtra("NAME")
+        detailName.text = (intent.getStringExtra("NAME"))?.toUpperCase()
     }
 }
