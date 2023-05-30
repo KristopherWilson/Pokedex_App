@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class PokemonAdapter(var pokemonList: Pokemon, var mainActivity: MainActivity) : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>()
 {
+    private val pokemonDictionary = linkedMapOf<String, Int>()
     inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         var textViewName: TextView
@@ -28,6 +28,10 @@ class PokemonAdapter(var pokemonList: Pokemon, var mainActivity: MainActivity) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder
     {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_pokedex, parent, false)
+        for (i in 0..(pokemonList.results.size - 1))
+        {
+            pokemonDictionary[pokemonList.results[i].name] = 0
+        }
         return PokemonViewHolder(view)
     }
 
@@ -54,12 +58,28 @@ class PokemonAdapter(var pokemonList: Pokemon, var mainActivity: MainActivity) :
             {
                 holder.itemView.setBackgroundColor(Color.parseColor("#0BA28E"))
                 holder.textViewName.setTextColor(Color.parseColor("#ffffff"))
+                pokemonDictionary.replace(pokemonList.results[position].name,1)
+                println(pokemonDictionary)
+            }
+            else{
+                holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"))
+                holder.textViewName.setTextColor(Color.parseColor("#000000"))
+                pokemonDictionary.replace(pokemonList.results[position].name,0)
+            }
+        }//end checkMark holder
+
+        for (i in pokemonDictionary)
+        {
+            if (i.value == 1)
+            {
+                holder.itemView.setBackgroundColor(Color.parseColor("#0BA28E"))
+                holder.textViewName.setTextColor(Color.parseColor("#ffffff"))
             }
             else{
                 holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"))
                 holder.textViewName.setTextColor(Color.parseColor("#000000"))
             }
-        }//end checkMark holder
+        }
     }//end onBindViewHolder
 
 }//end PokemonAdapter
